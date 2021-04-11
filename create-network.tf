@@ -5,6 +5,19 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
+resource "azurerm_monitor_diagnostic_setting" "vnetdiag" {
+  name               = "vnetdiag"
+  target_resource_id = azurerm_virtual_network.vnet.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
+
+  metric {
+    category = "AllMetrics"
+  }
+  log {
+    category = "VMProtectionAlerts"
+  }  
+}
+
 resource "azurerm_subnet" "subnet" {
   name                 = "internal"
   resource_group_name  = azurerm_resource_group.rg.name
