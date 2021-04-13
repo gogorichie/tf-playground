@@ -3,16 +3,15 @@ provider "azurerm" {
 }
 
 data "azurerm_subnet" "subnet" {
-  name                 = var.subnet
-  virtual_network_name = var.vnet
-  resource_group_name  = var.resourcegroup
+  name                 = "websn01"
+  virtual_network_name = "prd-use2-xrm-spoke-vnet"
+  resource_group_name  = "prd-use2-xrm-spoke-rg"
 }
 
 resource "azurerm_network_interface" "nic" {
-  count               = var.node_count
-  name                = "${var.vmname}${format("%02d", count.index)}NIC"
+  name                = "${var.vmname}20NIC"
   location            = var.location
-  resource_group_name = var.resourcegroup
+  resource_group_name = data.azurerm_subnet.subnet.resource_group_name
 
   ip_configuration {
     name                          = "internal"
@@ -23,21 +22,20 @@ resource "azurerm_network_interface" "nic" {
 
 
 resource "azurerm_windows_virtual_machine" "vm" {
-  count               = var.node_count
-  name                = "${var.vmname}-${format("%02d", count.index)}"
-  resource_group_name = var.resourcegroup
-  location            = var.location
-  size                = var.vmsize
-  admin_username      = var.adminUsername
-  admin_password      = var.adminPassword
+  name                  = "${var.vmname}-20"
+  resource_group_name   = data.azurerm_subnet.subnet.resource_group_name
+  location              = var.location
+  size                  = var.vmsize
+  admin_username        = var.adminUsername
+  admin_password        = var.adminPassword
   network_interface_ids = [
-    element(azurerm_network_interface.nic.*.id, count.index),
+    azurerm_network_interface.nic.id,
   ]
 
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
-    name                 = "${var.vmname}${format("%02d", count.index)}OSDISK"
+    name                 = "${var.vmname}20OSDISK"
   }
 
   source_image_reference {
@@ -49,15 +47,16 @@ resource "azurerm_windows_virtual_machine" "vm" {
 }
 
 resource "azurerm_dev_test_global_vm_shutdown_schedule" "shutdown" {
-  count              = var.node_count
-  virtual_machine_id = azurerm_windows_virtual_machine.vm[count.index].id
-  location           = azurerm_windows_virtual_machine.vm[count.index].location
+  virtual_machine_id = azurerm_windows_virtual_machine.vm.id
+  location           = azurerm_windows_virtual_machine.vm.location
   enabled            = true
 
-  daily_recurrence_time = "2200"
+  daily_recurrence_time = "2100"
   timezone              = "Central Standard Time"
 
   notification_settings {
-    enabled         = false
+    enabled = false
   }
 }
+
+#####################

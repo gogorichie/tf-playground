@@ -38,3 +38,32 @@ resource "azurerm_windows_virtual_machine" "vm" {
     version   = "latest"
   }
 }
+
+resource "azurerm_dev_test_global_vm_shutdown_schedule" "shutdown" {
+  count              = var.node_count
+  virtual_machine_id = azurerm_windows_virtual_machine.vm[count.index].id
+  location           = azurerm_windows_virtual_machine.vm[count.index].location
+  enabled            = true
+
+  daily_recurrence_time = "2100"
+  timezone              = "Central Standard Time"
+
+  notification_settings {
+    enabled = false
+  }
+}
+
+# resource "azurerm_monitor_diagnostic_setting" "nsg-diagnostics" {
+#   count                      = var.node_count
+#   name                       = "diag2law"
+#   target_resource_id         = azurerm_windows_virtual_machine.vm[count.index].id
+#   log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
+#   log {
+#     category = "NetworkSecurityGroupEvent"
+#     enabled  = true
+#   }
+#   log {
+#     category = "NetworkSecurityGroupRuleCounter"
+#     enabled  = true
+#   }
+# }

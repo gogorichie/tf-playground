@@ -1,18 +1,3 @@
-variable "resourcegroup" {
-  type    = string
-  default = "beta-use2-loop-spoke-rg"
-}
-
-variable "vnet" {
-  type = string
-  default = "beta-use2-loop-spoke-vnet"
-}
-
-variable "subnet" {
-  type = string
-  default = "websn01"  
-}
-
 variable "location" {
   type    = string
   default = "east us 2"
@@ -24,11 +9,6 @@ variable "vmname" {
   default = "TST-USE2-TFT"
 }
 
-variable "node_count" {
-  type    = number
-  default = 2
-}
-
 variable "vmsku" {
   type    = string
   default = "2019-Datacenter"
@@ -36,15 +16,15 @@ variable "vmsku" {
 
 variable "vmsize" {
   type    = string
-  default = "Standard_B2s"
+  default = "Standard_D2s_v4"
 }
 
 variable "adminUsername" {
   type    = string
-  default = "dest"
+  default = "tstadmin"
 }
 
 variable "adminPassword" {
   type    = string
-  default = "q2w3e4r5t6$"
+  default = "*********"
 }
