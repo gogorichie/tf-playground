@@ -1,6 +1,6 @@
 variable "resourcegroup" {
   type    = string
-  default = "tstrg04112021"
+  default = "tst04272021"
 }
 
 variable "location" {
@@ -11,12 +11,17 @@ variable "location" {
 
 variable "vmname" {
   type    = string
-  default = "TST-EUS-TFT"
+  default = "TSTEUSWIN"
 }
 
-variable "node_count" {   
-     type = number
-    default = 5     
+variable "linuxvmname" {
+  type    = string
+  default = "TSTEUSLIN"
+}
+
+variable "node_count" {
+  type    = number
+  default = 2
 }
 
 variable "vmsku" {
