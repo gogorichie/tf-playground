@@ -4,8 +4,8 @@ provider "azurerm" {
 
 data "azurerm_subnet" "subnet" {
   name                 = "websn01"
-  virtual_network_name = "prd-use2-xrm-spoke-vnet"
-  resource_group_name  = "prd-use2-xrm-spoke-rg"
+  virtual_network_name = "vnet"
+  resource_group_name  = "rg"
 }
 
 resource "azurerm_network_interface" "nic" {

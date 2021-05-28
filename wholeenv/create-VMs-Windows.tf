@@ -4,6 +4,8 @@ resource "azurerm_network_interface" "nic" {
   name                = "${var.vmname}${format("%02d", count.index)}NIC"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  tags                = local.tags
+
 
   ip_configuration {
     name                          = "internal"
@@ -21,6 +23,8 @@ resource "azurerm_windows_virtual_machine" "vm" {
   size                = var.vmsize
   admin_username      = var.adminUsername
   admin_password      = var.adminPassword
+  tags                = local.tags
+
   network_interface_ids = [
     element(azurerm_network_interface.nic.*.id, count.index),
   ]
@@ -43,7 +47,7 @@ resource "azurerm_dev_test_global_vm_shutdown_schedule" "shutdown" {
   count              = var.node_count
   virtual_machine_id = azurerm_windows_virtual_machine.vm[count.index].id
   location           = azurerm_windows_virtual_machine.vm[count.index].location
-  enabled            = true
+  enabled            = false
 
   daily_recurrence_time = "0000"
   timezone              = "Central Standard Time"

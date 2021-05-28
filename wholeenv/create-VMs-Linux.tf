@@ -4,6 +4,8 @@ resource "azurerm_network_interface" "linuxnic" {
   name                = "${var.linuxvmname}${format("%02d", count.index)}NIC"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  tags                = local.tags
+
 
   ip_configuration {
     name                          = "internal"
@@ -14,14 +16,16 @@ resource "azurerm_network_interface" "linuxnic" {
 
 
 resource "azurerm_linux_virtual_machine" "linuxvm" {
-  count               = var.node_count
-  name                = "${var.linuxvmname}-${format("%02d", count.index)}"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  size                = var.vmsize
-  admin_username      = var.adminUsername
-  admin_password      = var.adminPassword
+  count                           = var.node_count
+  name                            = "${var.linuxvmname}-${format("%02d", count.index)}"
+  resource_group_name             = azurerm_resource_group.rg.name
+  location                        = azurerm_resource_group.rg.location
+  size                            = var.vmsize
+  admin_username                  = var.adminUsername
+  admin_password                  = var.adminPassword
   disable_password_authentication = "false"
+  tags                            = local.tags
+
   provision_vm_agent = "true"
   network_interface_ids = [
     element(azurerm_network_interface.linuxnic.*.id, count.index),
@@ -47,7 +51,7 @@ resource "azurerm_dev_test_global_vm_shutdown_schedule" "linuxshutdown" {
   count              = var.node_count
   virtual_machine_id = azurerm_linux_virtual_machine.linuxvm[count.index].id
   location           = azurerm_linux_virtual_machine.linuxvm[count.index].location
-  enabled            = true
+  enabled            = false
 
   daily_recurrence_time = "0000"
   timezone              = "Central Standard Time"

@@ -1,6 +1,6 @@
 variable "resourcegroup" {
   type    = string
-  default = "tst04272021"
+  default = "tfproject"
 }
 
 variable "location" {
@@ -21,7 +21,7 @@ variable "linuxvmname" {
 
 variable "node_count" {
   type    = number
-  default = 2
+  default = 1
 }
 
 variable "vmsku" {
@@ -41,5 +41,5 @@ variable "adminUsername" {
 
 variable "adminPassword" {
   type    = string
-  default = "RUeBeprk9g5v"
+  default = "ThisIsABadPassw0rd!"
 }

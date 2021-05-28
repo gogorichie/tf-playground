@@ -3,11 +3,13 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  tags                = local.tags
+
 }
 
 resource "azurerm_monitor_diagnostic_setting" "vnetdiag" {
-  name               = "diag2law"
-  target_resource_id = azurerm_virtual_network.vnet.id
+  name                       = "diag2law"
+  target_resource_id         = azurerm_virtual_network.vnet.id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
 
   metric {
@@ -15,7 +17,7 @@ resource "azurerm_monitor_diagnostic_setting" "vnetdiag" {
   }
   log {
     category = "VMProtectionAlerts"
-  }  
+  }
 }
 
 resource "azurerm_subnet" "subnet" {
@@ -29,6 +31,8 @@ resource "azurerm_network_security_group" "nsg" {
   name                = "${azurerm_resource_group.rg.name}-nsg"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  tags                = local.tags
+
 }
 
 resource "azurerm_network_security_rule" "nsr" {
@@ -46,15 +50,15 @@ resource "azurerm_network_security_rule" "nsr" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "nsg-diagnostics" {
- name                       = "diag2law"
- target_resource_id         = azurerm_network_security_rule.nsr.id
- log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
- log {
-   category = "NetworkSecurityGroupEvent"
-   enabled  = true
- }
- log {
-   category = "NetworkSecurityGroupRuleCounter"
-   enabled  = true
- }
+  name                       = "diag2law"
+  target_resource_id         = azurerm_network_security_group.nsg.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
+  log {
+    category = "NetworkSecurityGroupEvent"
+    enabled  = true
+  }
+  log {
+    category = "NetworkSecurityGroupRuleCounter"
+    enabled  = true
+  }
 }
