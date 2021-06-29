@@ -28,3 +28,18 @@ variable "adminPassword" {
   type    = string
   default = "*********"
 }
+
+variable "snname" {
+  type    = string
+  default = "*********"
+}
+
+variable "adminPassword" {
+  type    = string
+  default = "*********"
+}
+
+variable "adminPassword" {
+  type    = string
+  default = "*********"
+}

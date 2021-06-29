@@ -3,9 +3,9 @@ provider "azurerm" {
 }
 
 data "azurerm_subnet" "subnet" {
-  name                 = "websn01"
-  virtual_network_name = "vnet"
-  resource_group_name  = "rg"
+  name                 = var.snname
+  virtual_network_name = var.vnetname
+  resource_group_name  = var.rg
 }
 
 resource "azurerm_network_interface" "nic" {
