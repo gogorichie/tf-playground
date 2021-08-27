@@ -16,14 +16,17 @@ resource "azurerm_network_interface" "nic" {
 
 
 resource "azurerm_windows_virtual_machine" "vm" {
-  count               = var.node_count
-  name                = "${var.vmname}-${format("%02d", count.index)}"
+  count      = var.node_count
+  name       = "${var.vmname}-${format("%02d", count.index)}"
+  depends_on = [azurerm_key_vault.kv1]
+
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   size                = var.vmsize
   admin_username      = var.adminUsername
-  admin_password      = var.adminPassword
-  tags                = local.tags
+  admin_password      = azurerm_key_vault_secret.vmpassword.value
+
+  tags = local.tags
 
   network_interface_ids = [
     element(azurerm_network_interface.nic.*.id, count.index),

@@ -18,11 +18,12 @@ resource "azurerm_network_interface" "linuxnic" {
 resource "azurerm_linux_virtual_machine" "linuxvm" {
   count                           = var.node_count
   name                            = "${var.linuxvmname}-${format("%02d", count.index)}"
+  depends_on                      = [azurerm_key_vault.kv1]
   resource_group_name             = azurerm_resource_group.rg.name
   location                        = azurerm_resource_group.rg.location
   size                            = var.vmsize
   admin_username                  = var.adminUsername
-  admin_password                  = var.adminPassword
+  admin_password                  = azurerm_key_vault_secret.vmpassword.value
   disable_password_authentication = "false"
   tags                            = local.tags
 
