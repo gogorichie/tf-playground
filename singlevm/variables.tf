@@ -26,20 +26,20 @@ variable "adminUsername" {
 
 variable "adminPassword" {
   type    = string
-  default = "*********"
+  default = "ThisIsABadPassw0rd!"
 }
 
 variable "snname" {
   type    = string
-  default = "*********"
+  default = "ThisIsABadPassw0rd!"
 }
 
 variable "adminPassword" {
   type    = string
-  default = "*********"
+  default = "ThisIsABadPassw0rd!"
 }
 
 variable "adminPassword" {
   type    = string
-  default = "*********"
+  default = "ThisIsABadPassw0rd!"
 }
