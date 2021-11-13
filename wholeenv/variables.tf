@@ -1,11 +1,11 @@
 variable "resourcegroup" {
   type    = string
-  default = "tfproject"
+  default = "Terraformlab"
 }
 
 variable "location" {
   type    = string
-  default = "east us"
+  default = "east us 2"
 }
 #VM Details
 
@@ -21,7 +21,7 @@ variable "linuxvmname" {
 
 variable "node_count" {
   type    = number
-  default = 1
+  default = 4
 }
 
 variable "vmsku" {
@@ -37,9 +37,4 @@ variable "vmsize" {
 variable "adminUsername" {
   type    = string
   default = "AdminRich"
-}
-
-variable "adminPassword" {
-  type    = string
-  default = "ThisIsABadPassw0rd!"
 }

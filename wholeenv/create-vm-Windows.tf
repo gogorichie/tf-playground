@@ -17,7 +17,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_windows_virtual_machine" "vm" {
   count      = var.node_count
-  name       = "${var.vmname}-${format("%02d", count.index)}"
+  name       = "${var.vmname}${format("%02d", count.index)}"
   depends_on = [azurerm_key_vault.kv1]
 
   resource_group_name = azurerm_resource_group.rg.name
