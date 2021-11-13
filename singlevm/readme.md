@@ -1,15 +1,17 @@
-# Terraform Create A Azure Environment:
+# Terraform Create A Single Azure VM Within Existing Network:
 
 # Goal: 
 
-Teaching the basic of how to layout a easy to understand terraform based network design. In this example we will be deploying a full network which is common in greenfield deployments.
+Teaching the basics of how to add a resource to an existing network using the data type to refer to an existing resource. In this example we will be deploying a VM which is common in brownfield migrations.
 
 
 # Resource Plan:
 
 This Terraform plan will provision the following resources listed below:
 
-**todo**
+* VM
+* NIC
+* Shutdown Schedule
 
 
 # Deployment Instructions:
