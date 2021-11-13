@@ -1,6 +1,6 @@
 variable "resourcegroup" {
   type    = string
-  default = "Terraformlab"
+  default = "terraformlab"
 }
 
 variable "location" {
