@@ -2,6 +2,21 @@ variable "location" {
   type    = string
   default = "east us 2"
 }
+
+variable "snname" {
+  type    = string
+  description = "Existing Subnet Name"
+}
+
+variable "vnetname" {
+  type    = string
+    description = "Existing vNet Name"
+}
+
+variable "rg" {
+  type    = string
+    description = "Existing Resource Group Name"
+}
 #VM Details
 
 variable "vmname" {
@@ -16,7 +31,7 @@ variable "vmsku" {
 
 variable "vmsize" {
   type    = string
-  default = "Standard_D2s_v4"
+  default = "Standard_B4ms"
 }
 
 variable "adminUsername" {
@@ -29,17 +44,3 @@ variable "adminPassword" {
   default = "ThisIsABadPassw0rd!"
 }
 
-variable "snname" {
-  type    = string
-  default = "ThisIsABadPassw0rd!"
-}
-
-variable "adminPassword" {
-  type    = string
-  default = "ThisIsABadPassw0rd!"
-}
-
-variable "adminPassword" {
-  type    = string
-  default = "ThisIsABadPassw0rd!"
-}
