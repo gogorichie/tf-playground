@@ -11,6 +11,18 @@ This Terraform plan will provision the following resources listed below:
 
 **todo**
 
+*APM
+*Network Security Group
+*
+*Azure Key Vault
+*Log Analytics Workspace
+*Azure Monitor Action Group
+*Azure Monitor Alert
+*Linux VM
+*Windows VM
+*Linux Shutdown Schedule
+*Windows Shutdown Schedule
+
 
 # Deployment Instructions:
 1. Install Terraform [package](https://learn.hashicorp.com/tutorials/terraform/install-cli)
