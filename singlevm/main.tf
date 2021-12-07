@@ -35,7 +35,7 @@ resource "azurerm_windows_virtual_machine" "vm" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
-    name                 = "${var.vmname}20OSDISK"
+    name                 = "${var.vmname}OSDISK"
   }
 
   source_image_reference {
@@ -59,4 +59,3 @@ resource "azurerm_dev_test_global_vm_shutdown_schedule" "shutdown" {
   }
 }
 
-#####################
