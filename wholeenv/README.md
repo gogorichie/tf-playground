@@ -24,5 +24,5 @@ This Terraform plan will provision the following resources listed below:
 5.     terraform init
    - terraform workspace new <<workspace name, eg nonprod, prod, etc.>>
    - terraform workspace select <<workspace name used in previous step>>
-   - terraform plan  -out=tfplan -var-file <<use the one of the 3Cloud baseline tfvars in the environment tfvars folder>>
-   - terraform apply "tfplan"
+   - terraform plan
+   - terraform apply
