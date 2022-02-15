@@ -21,3 +21,5 @@ Programming:
 https://buildvirtual.net/terraform-for-each-loop-examples/
 
 https://stackoverflow.com/questions/50316302/terraform-combine-2-variables-into-a-new-variable
+
+http://vcloud-lab.com/entries/microsoft-azure/terraform-for-each-loop-on-map-example
