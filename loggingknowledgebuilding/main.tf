@@ -105,3 +105,34 @@ resource "azurerm_dev_test_global_vm_shutdown_schedule" "shutdown" {
 
 }
 
+#Agent for Windows
+resource "azurerm_virtual_machine_extension" "mmaagent" {
+  name                       = "mmaagent"
+  virtual_machine_id         = azurerm_windows_virtual_machine.logdemo.id
+  publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
+  type                       = "MicrosoftMonitoringAgent"
+  type_handler_version       = "1.0"
+  auto_upgrade_minor_version = "true"
+  settings                   = <<SETTINGS
+    {
+      "workspaceId" : "${azurerm_log_analytics_workspace.logdemo.workspace_id}"
+    }
+  SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "workspaceKey" : "${azurerm_log_analytics_workspace.logdemo.primary_shared_key}"
+    }
+  PROTECTED_SETTINGS
+}
+
+# Dependency Agent for Windows
+resource "azurerm_virtual_machine_extension" "da" {
+  name                       = "DAExtension"
+  virtual_machine_id         = azurerm_windows_virtual_machine.logdemo.id
+  publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
+  type                       = "DependencyAgentWindows"
+  type_handler_version       = "9.5"
+  auto_upgrade_minor_version = true
+
+}

@@ -60,17 +60,36 @@ resource "azurerm_dev_test_global_vm_shutdown_schedule" "shutdown" {
   }
 }
 
-# resource "azurerm_monitor_diagnostic_setting" "nsg-diagnostics" {
-#   count                      = var.node_count
-#   name                       = "diag2law"
-#   target_resource_id         = azurerm_windows_virtual_machine.vm[count.index].id
-#   log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
-#   log {
-#     category = "NetworkSecurityGroupEvent"
-#     enabled  = true
-#   }
-#   log {
-#     category = "NetworkSecurityGroupRuleCounter"
-#     enabled  = true
-#   }
-# }
+#Agent for Windows
+resource "azurerm_virtual_machine_extension" "mmaagent" {
+  count              = var.node_count
+  name                       = "mmaagent"
+  virtual_machine_id         = azurerm_windows_virtual_machine.vm[count.index].id
+  publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
+  type                       = "MicrosoftMonitoringAgent"
+  type_handler_version       = "1.0"
+  auto_upgrade_minor_version = "true"
+  settings                   = <<SETTINGS
+    {
+      "workspaceId" : "${azurerm_log_analytics_workspace.law.workspace_id}"
+    }
+  SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "workspaceKey" : "${azurerm_log_analytics_workspace.law.primary_shared_key}"
+    }
+  PROTECTED_SETTINGS
+}
+
+# Dependency Agent for Windows
+resource "azurerm_virtual_machine_extension" "da" {
+  count              = var.node_count
+  name                       = "DAExtension"
+  virtual_machine_id         = azurerm_windows_virtual_machine.vm[count.index].id
+  publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
+  type                       = "DependencyAgentWindows"
+  type_handler_version       = "9.5"
+  auto_upgrade_minor_version = true
+
+}
