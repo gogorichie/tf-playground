@@ -64,9 +64,9 @@ resource "azurerm_dev_test_global_vm_shutdown_schedule" "linuxshutdown" {
 
 # Agent for Linux
 resource "azurerm_virtual_machine_extension" "OMS4linux" {
-  count              = var.node_count
+  count                      = var.node_count
   name                       = "omsagent"
-  virtual_machine_id         =  azurerm_linux_virtual_machine.linuxvm[count.index].id
+  virtual_machine_id         = azurerm_linux_virtual_machine.linuxvm[count.index].id
   publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
   type                       = "OmsAgentForLinux"
   type_handler_version       = "1.13"
@@ -87,9 +87,9 @@ resource "azurerm_virtual_machine_extension" "OMS4linux" {
 
 # Dependency Agent for Linux
 resource "azurerm_virtual_machine_extension" "da4linux" {
-  count              = var.node_count
+  count                      = var.node_count
   name                       = "DAExtension"
-  virtual_machine_id         =  azurerm_linux_virtual_machine.linuxvm[count.index].id
+  virtual_machine_id         = azurerm_linux_virtual_machine.linuxvm[count.index].id
   publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
   type                       = "DependencyAgentLinux"
   type_handler_version       = "9.5"

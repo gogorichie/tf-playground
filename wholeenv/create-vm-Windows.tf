@@ -62,7 +62,7 @@ resource "azurerm_dev_test_global_vm_shutdown_schedule" "shutdown" {
 
 #Agent for Windows
 resource "azurerm_virtual_machine_extension" "mmaagent" {
-  count              = var.node_count
+  count                      = var.node_count
   name                       = "mmaagent"
   virtual_machine_id         = azurerm_windows_virtual_machine.vm[count.index].id
   publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
@@ -84,7 +84,7 @@ resource "azurerm_virtual_machine_extension" "mmaagent" {
 
 # Dependency Agent for Windows
 resource "azurerm_virtual_machine_extension" "da" {
-  count              = var.node_count
+  count                      = var.node_count
   name                       = "DAExtension"
   virtual_machine_id         = azurerm_windows_virtual_machine.vm[count.index].id
   publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
