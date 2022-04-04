@@ -11,6 +11,7 @@ Configuration:
 
 https://www.gitmemory.com/issue/terraform-providers/terraform-provider-azurerm/5102/562844942
 https://www.jorgebernhardt.com/terraform-backend-azure/
+https://samcogan.com/using-terraform-modules-from-git-in-azure-devops/
 
 Goverance:
 
