@@ -1,5 +1,5 @@
 # tf-playground
-Terraform Based Azure Playground Environment(s) For Learning Really Really Cool Things.
+This repository contains Terraform sample code for Azure - mostly smaller deployments, labs, test environments. These are environments I used to demonstrate/test. Feel free to use these as you wish! :)
 
 
 
