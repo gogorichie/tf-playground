@@ -1,7 +1,13 @@
 # tf-playground
 This repository contains Terraform sample code for Azure - mostly smaller deployments, labs, test environments. These are environments I used to demonstrate/test. Feel free to use these as you wish! :)
 
-
+<p align="center">
+    <img src ="https://img.shields.io/github/repo-size/gogorichie/tf-playground" alt="Repository Size">
+    <img src ="https://img.shields.io/github/languages/top/gogorichie/tf-playground" alt="languages">
+    <img src ="https://img.shields.io/github/last-commit/gogorichie/tf-playground" alt="Last Commit">
+    <img src ="https://img.shields.io/github/issues/gogorichie/tf-playground?color=important" alt="Open Issues">
+    <img src ="https://img.shields.io/github/issues-pr/gogorichie/tf-playground?color=yellowgreen" alt="Open Pull Reqeusts">
+</p>
 
 
 Interesting blog post:
