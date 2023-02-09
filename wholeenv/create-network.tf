@@ -15,7 +15,7 @@ resource "azurerm_monitor_diagnostic_setting" "vnetdiag" {
   metric {
     category = "AllMetrics"
   }
-  log {
+  enabled_log {
     category = "VMProtectionAlerts"
   }
 }
@@ -53,12 +53,10 @@ resource "azurerm_monitor_diagnostic_setting" "nsg-diagnostics" {
   name                       = "diag2law"
   target_resource_id         = azurerm_network_security_group.nsg.id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
-  log {
+  enabled_log {
     category = "NetworkSecurityGroupEvent"
-    enabled  = true
   }
-  log {
+  enabled_log {
     category = "NetworkSecurityGroupRuleCounter"
-    enabled  = true
   }
 }

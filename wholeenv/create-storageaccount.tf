@@ -2,7 +2,7 @@ resource "random_string" "random" {
   length  = 3
   upper   = false
   lower   = true
-  number  = true
+  numeric = true
   special = false
 }
 
