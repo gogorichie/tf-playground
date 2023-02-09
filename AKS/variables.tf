@@ -30,6 +30,3 @@ variable "kind" {
   type    = string
   default = "Linux"
 }
-
-
-
