@@ -1,6 +1,6 @@
 variable "resourcegroup" {
   type    = string
-  default = "rlewislab"
+  default = "rlewis"
 }
 
 variable "NS_Environment" {
@@ -8,9 +8,9 @@ variable "NS_Environment" {
   default = "test"
 }
 
-variable "Project" {
-   type    = string
-  default = "Terraformlab" 
+variable "NS_Application" {
+  type    = string
+  default = "lab"
 }
 
 variable "location" {

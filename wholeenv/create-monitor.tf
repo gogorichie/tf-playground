@@ -1,5 +1,5 @@
 resource "azurerm_monitor_action_group" "actiongroup" {
-  name                = "${var.Project}-CriticalAlertsAction"
+  name                = "${var.NS_Application}-CriticalAlertsAction"
   resource_group_name = azurerm_resource_group.rg.name
   short_name          = "p0action"
 
@@ -11,7 +11,7 @@ resource "azurerm_monitor_action_group" "actiongroup" {
 }
 
 resource "azurerm_monitor_metric_alert" "strgacctalert" {
-  name                = "${var.Project}-metricalert"
+  name                = "${var.NS_Application}-metricalert"
   resource_group_name = azurerm_resource_group.rg.name
   scopes              = [azurerm_storage_account.strgacct.id]
   description         = "Action will be triggered when Transactions count is greater than 50."
