@@ -1,7 +1,7 @@
 
 resource "azurerm_network_interface" "nic" {
   count               = var.node_count
-  name                = "${var.vmname}${format("%02d", count.index)}NIC"
+  name                = "${var.winvmname}${format("%02d", count.index)}NIC"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   tags                = local.tags
@@ -17,7 +17,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_windows_virtual_machine" "vm" {
   count      = var.node_count
-  name       = "${var.vmname}${format("%02d", count.index)}"
+  name       = "${var.winvmname}${format("%02d", count.index)}"
   depends_on = [azurerm_key_vault.kv1]
 
   resource_group_name = azurerm_resource_group.rg.name
@@ -35,7 +35,7 @@ resource "azurerm_windows_virtual_machine" "vm" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
-    name                 = "${var.vmname}${format("%02d", count.index)}OSDISK"
+    name                 = "${var.winvmname}${format("%02d", count.index)}OSDISK"
   }
 
   source_image_reference {

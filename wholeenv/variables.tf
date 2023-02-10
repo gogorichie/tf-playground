@@ -3,13 +3,23 @@ variable "resourcegroup" {
   default = "rlewislab"
 }
 
+variable "NS_Environment" {
+  type    = string
+  default = "test"
+}
+
+variable "Project" {
+   type    = string
+  default = "Terraformlab" 
+}
+
 variable "location" {
   type    = string
   default = "east us 2"
 }
 #VM Details
 
-variable "vmname" {
+variable "winvmname" {
   type    = string
   default = "TSTEUSWIN"
 }

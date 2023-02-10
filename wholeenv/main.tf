@@ -6,5 +6,5 @@ provider "azurerm" {
 
 locals {
   current_time = formatdate("MMM DD, YYYY hh:mm:ss", timestamp())
-  tags         = merge({ "Project" = "Terraformlab" }, { "OkToDelete" = "Yes" })
+  tags         = merge({ "environment" = var.NS_Environment }, { "Project" = var.Project })
 }
